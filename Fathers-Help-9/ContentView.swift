@@ -16,7 +16,7 @@ struct ContentView: View {
             Rectangle()
                 .fill(
                     RadialGradient(
-                        gradient: .init(colors: [Color.yellow, Color.red]),
+                        gradient: .init(colors: [.yellow, .red]),
                         center: .center,
                         startRadius: 55,
                         endRadius: 110
@@ -24,21 +24,20 @@ struct ContentView: View {
                 )
                 .mask {
                     Canvas { context, size in
-                        let symbolOne = context.resolveSymbol(id: 0)!
-                        let symbolTwo = context.resolveSymbol(id: 1)!
+                        let symbol_0 = context.resolveSymbol(id: 0)!
+                        let symbol_1 = context.resolveSymbol(id: 1)!
                         
                         context.addFilter(.alphaThreshold(min: 0.5, color: .yellow))
                         context.addFilter(.blur(radius: 30))
                         
                         context.drawLayer { context in
-                            context.draw(symbolOne, at: point)
-                            context.draw(symbolTwo, at: point)
+                            context.draw(symbol_0, at: point)
+                            context.draw(symbol_1, at: point)
                         }
                     } symbols: {
                         Circle().frame(width: 110).tag(0)
                         Circle().frame(width: 111).tag(1)
                             .offset(x: offset.width, y: offset.height)
-                        
                     }
                 }
                 .overlay {
